@@ -12,6 +12,10 @@ metadata:
   namespace: openshift
 objects:
 - apiVersion: "v1"
+  kind: ImageStream
+  metadata:
+    name: rhel-splunk-forwarder
+- apiVersion: "v1"
   kind: "BuildConfig"
   metadata:
     name: "splunk-forwarder"
@@ -21,7 +25,7 @@ objects:
       sourceStrategy:
         from:
           kind: "ImageStreamTag"
-          name: "rhel7.2"
+          name: "rhel-splunk-forwarder"
       source:
         type: Git
         git:
