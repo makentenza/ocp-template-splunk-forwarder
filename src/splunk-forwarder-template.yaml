@@ -12,28 +12,27 @@ metadata:
   namespace: openshift
 objects:
 - apiVersion: "v1"
-  kind: ImageStream
+  kind: "ImageStream"
   metadata:
-    name: rhel-splunk-forwarder
+    name: "splunk-forwarder"
 - apiVersion: "v1"
   kind: "BuildConfig"
   metadata:
     name: "splunk-forwarder"
   spec:
+    triggers:
+      - type: ConfigChange
+      - type: ImageChange
+    source:
+      type: Git
+      git:
+        uri: https://github.com/makentenza/ocp-template-splunk-forwarder.git
     strategy:
       type: "Docker"
-      sourceStrategy:
+      dockerStrategy:
         from:
-          kind: "ImageStreamTag"
-          name: "rhel-splunk-forwarder"
-      source:
-        type: Git
-        git:
-          uri: https://github.com/makentenza/ocp-splunk-forwarder.git
-        triggers:
-          - type: ConfigChange
-          - type: ImageChange
-          - type: GitHub
+          kind: "DockerImage"
+          name: "registry.access.redhat.com/rhel7.2"
     output:
       to:
         kind: "ImageStreamTag"
