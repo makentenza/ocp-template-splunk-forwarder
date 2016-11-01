@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: splunk-forwarder-template
+message: A Splunk Forwarder has been created
+metadata:
+  annotations:
+    description: Splunk Forwarder Agent
+    iconClass: icon-jenkins
+    tags: instant-app,splunk
+  name: splunk-forwarder
+  namespace: openshift
+objects:
+- apiVersion: "v1"
+  kind: "BuildConfig"
+  metadata:
+    name: "splunk-forwarder"
+  spec:
+    strategy:
+      type: "Docker"
+      sourceStrategy:
+        from:
+          kind: "ImageStreamTag"
+          name: "rhel7.2"
+      source:
+        type: Git
+        git:
+          uri: https://github.com/makentenza/ocp-splunk-forwarder.git
+        triggers:
+          - type: ConfigChange
+          - type: ImageChange
+          - type: GitHub
+    output:
+      to:
+        kind: "ImageStreamTag"
+        name: "splunk-forwarder:latest"
+- apiVersion: "v1"
+  kind: "DeploymentConfig"
+  metadata:
+    name: "splunk-forwarder"
+  spec:
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          name: "splunk"
+      spec:
+        containers:
+          - name: "splunk-forwarder"
+            image: "splunk-forwarder:latest"
+            ports:
+              - containerPort: 8089
+                protocol: "TCP"
+    replicas: 1
+    triggers:
+      - type: "ConfigChange"
+      - type: "ImageChange"
+        imageChangeParams:
+          automatic: true
+          containerNames:
+            - "splunk-forwarder"
+          from:
+            kind: "ImageStreamTag"
+            name: "splunk-forwarder:latest"
+    strategy:
+      type: "Rolling"
+    paused: false
+    revisionHistoryLimit: 2
+    minReadySeconds: 0
