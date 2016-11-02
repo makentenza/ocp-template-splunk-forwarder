@@ -11,14 +11,6 @@ $ oadm policy add-scc-to-user privileged system:serviceaccount:logging:splunk-fo
 
 # List of objets created from Template
 
---> Deploying template "splunk-forwarder-template" in project "openshift"
-
-     splunk-forwarder-template
-     ---------
-     Splunk Forwarder Agent
-
-     A Splunk Forwarder has been created
-
 --> Creating resources with label app=splunk-forwarder-template ...
     serviceaccount "splunk-forwarder" created
     imagestream "splunk-forwarder" created
