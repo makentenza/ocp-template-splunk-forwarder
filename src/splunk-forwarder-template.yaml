@@ -8,7 +8,7 @@ metadata:
     description: Splunk Forwarder Agent
     iconClass: icon-jenkins
     tags: instant-app,splunk
-  name: splunk-forwarder
+  name: splunk-forwarder-template
   namespace: openshift
 objects:
 - apiVersion: v1
