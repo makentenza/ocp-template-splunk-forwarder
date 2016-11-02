@@ -34,6 +34,9 @@ objects:
     strategy:
       type: "Docker"
       dockerStrategy:
+      env:
+      - name: SPLUNK_DEPLOYMENT_SERVER
+        value: {DEPLOYMENT_SERVER}
         from:
           kind: "DockerImage"
           name: "registry.access.redhat.com/rhel7.2"
@@ -87,3 +90,8 @@ objects:
     paused: false
     revisionHistoryLimit: 2
     minReadySeconds: 0
+parameters:
+- description: The HOSTNAME or IP of the Splunk Deployment Server
+  displayName: Splunk Deployment Server
+  name: DEPLOYMENT_SERVER
+  required: true
