@@ -58,15 +58,15 @@ objects:
           - name: SPLUNK_DEPLOYMENT_SERVER
             value: ${DEPLOYMENT_SERVER}
           - name: "splunk-forwarder"
-            image: "splunk-forwarder:latest"
-            ports:
-              - containerPort: 8089
-                protocol: "TCP"
-            securityContext:
-              privileged: true
-            volumeMounts:
-            - mountPath: /host/log
-              name: host-logdir
+          image: "splunk-forwarder:latest"
+          ports:
+            - containerPort: 8089
+              protocol: "TCP"
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - mountPath: /host/log
+            name: host-logdir
         volumes:
         - name: host-logdir
           hostPath:
