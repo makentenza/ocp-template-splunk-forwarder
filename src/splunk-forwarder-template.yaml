@@ -61,8 +61,8 @@ objects:
             securityContext:
               privileged: true
             volumeMounts:
-              - mountPath: /host/log
-                name: host-logdir
+            - mountPath: /host/log
+              name: host-logdir
         volumes:
         - name: host-logdir
           hostPath:
