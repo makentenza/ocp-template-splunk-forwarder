@@ -8,7 +8,7 @@ ENV BUILDER_VERSION 1.0
 ENV SPLUNK_RPM rpm/splunkforwarder-6.5.0-59c8927def0f-linux-2.6-x86_64.rpm
 ENV SPLUNK_HOME /opt/splunkforwarder
 ENV SPLUNK_BIN $SPLUNK_HOME/bin/splunk
-ENV SPLUNK_SERVER {SPLUNK_DEPLOYMENT_SERVER}:8089
+ENV SPLUNK_SERVER $SPLUNK_DEPLOYMENT_SERVER:8089
 
 LABEL io.k8s.description="Splunk forwarder agent" \
       io.k8s.display-name="Splunk Forwarder" \
