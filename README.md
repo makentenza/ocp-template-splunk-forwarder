@@ -20,3 +20,15 @@ imagestream "splunk-forwarder" created
 buildconfig "splunk-forwarder" created
 
 deploymentconfig "splunk-forwarder" created
+
+# Recreate in case Template changes
+
+$ oc project logging
+
+$ oc delete all -l app=splunk-forwarder-template
+
+$ oc replace -f https://raw.githubusercontent.com/makentenza/ocp-template-splunk-forwarder/master/src/splunk-forwarder-template.yaml
+
+$ oc new-app splunk-forwarder-template
+
+$ oadm policy add-scc-to-user privileged system:serviceaccount:logging:splunk-forwarder
