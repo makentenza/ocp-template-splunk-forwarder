@@ -63,10 +63,10 @@ objects:
             volumeMounts:
               - mountPath: /host/log
                 name: host-logdir
-          volumes:
-          - name: host-logdir
-            hostPath:
-              path: /var/log
+        volumes:
+        - name: host-logdir
+          hostPath:
+            path: /var/log
         securityContext:
           privileged: true
         serviceAccount: splunk-forwarder
