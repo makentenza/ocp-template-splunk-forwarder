@@ -53,6 +53,10 @@ objects:
           name: "splunk"
       spec:
         containers:
+        - capabilities: {}
+          env:
+          - name: SPLUNK_DEPLOYMENT_SERVER
+            value: ${DEPLOYMENT_SERVER}
           - name: "splunk-forwarder"
             image: "splunk-forwarder:latest"
             ports:
@@ -84,9 +88,6 @@ objects:
             name: "splunk-forwarder:latest"
     strategy:
       type: "Rolling"
-      env:
-      - name: SPLUNK_DEPLOYMENT_SERVER
-        value: {DEPLOYMENT_SERVER}
     paused: false
     revisionHistoryLimit: 2
     minReadySeconds: 0
