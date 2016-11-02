@@ -57,7 +57,7 @@ objects:
           env:
           - name: SPLUNK_DEPLOYMENT_SERVER
             value: ${DEPLOYMENT_SERVER}
-          - name: "splunk-forwarder"
+          name: "splunk-forwarder"
           image: "splunk-forwarder:latest"
           ports:
             - containerPort: 8089
