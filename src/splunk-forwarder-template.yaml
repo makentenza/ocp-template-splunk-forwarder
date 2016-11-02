@@ -34,9 +34,6 @@ objects:
     strategy:
       type: "Docker"
       dockerStrategy:
-      env:
-      - name: SPLUNK_DEPLOYMENT_SERVER
-        value: {DEPLOYMENT_SERVER}
         from:
           kind: "DockerImage"
           name: "registry.access.redhat.com/rhel7.2"
@@ -87,6 +84,9 @@ objects:
             name: "splunk-forwarder:latest"
     strategy:
       type: "Rolling"
+      env:
+      - name: SPLUNK_DEPLOYMENT_SERVER
+        value: {DEPLOYMENT_SERVER}
     paused: false
     revisionHistoryLimit: 2
     minReadySeconds: 0
