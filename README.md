@@ -25,10 +25,10 @@ deploymentconfig "splunk-forwarder" created
 
 $ oc project logging
 
-$ oc delete all -l app=splunk-forwarder-template --param=DEPLOYMENT_SERVER={IP or HOSTNAME}
+$ oc delete all -l app=splunk-forwarder-template
 
 $ oc replace -f https://raw.githubusercontent.com/makentenza/ocp-template-splunk-forwarder/master/src/splunk-forwarder-template.yaml
 
-$ oc new-app splunk-forwarder-template
+$ oc new-app splunk-forwarder-template --param=DEPLOYMENT_SERVER={IP or HOSTNAME}
 
 $ oadm policy add-scc-to-user privileged system:serviceaccount:logging:splunk-forwarder
