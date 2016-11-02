@@ -11,6 +11,10 @@ metadata:
   name: splunk-forwarder
   namespace: openshift
 objects:
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: splunk-forwarder
 - apiVersion: "v1"
   kind: "ImageStream"
   metadata:
@@ -54,6 +58,12 @@ objects:
             ports:
               - containerPort: 8089
                 protocol: "TCP"
+            securityContext:
+              privileged: true
+        securityContext:
+          privileged: true
+        serviceAccount: splunk-forwarder
+        serviceAccountName: splunk-forwarder
     replicas: 1
     triggers:
       - type: "ConfigChange"
