@@ -41,8 +41,8 @@ objects:
       to:
         kind: "ImageStreamTag"
         name: "splunk-forwarder:latest"
-- apiVersion: "v1"
-  kind: "DeploymentConfig"
+- apiVersion: extensions/v1beta1
+  kind: DaemonSet
   metadata:
     name: "splunk-forwarder"
   spec:
@@ -67,6 +67,8 @@ objects:
           volumeMounts:
           - mountPath: /host/log
             name: host-logdir
+          nodeSelector:
+            splunk-forwarder: "true"
         volumes:
         - name: host-logdir
           hostPath:
