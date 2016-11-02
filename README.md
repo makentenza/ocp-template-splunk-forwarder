@@ -11,8 +11,12 @@ $ oadm policy add-scc-to-user privileged system:serviceaccount:logging:splunk-fo
 
 # List of objets created from Template
 
---> Creating resources with label app=splunk-forwarder-template ...
-    serviceaccount "splunk-forwarder" created
-    imagestream "splunk-forwarder" created
-    buildconfig "splunk-forwarder" created
-    deploymentconfig "splunk-forwarder" created
+Creating resources with label app=splunk-forwarder-template ...
+
+serviceaccount "splunk-forwarder" created
+
+imagestream "splunk-forwarder" created
+
+buildconfig "splunk-forwarder" created
+
+deploymentconfig "splunk-forwarder" created
