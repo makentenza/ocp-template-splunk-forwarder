@@ -38,6 +38,9 @@ objects:
         from:
           kind: "DockerImage"
           name: "registry.access.redhat.com/rhel7.2"
+        env:
+        - name: SPLUNK_DEPLOYMENT_SERVER
+          value: ${DEPLOYMENT_SERVER}
     output:
       to:
         kind: "ImageStreamTag"
@@ -54,11 +57,11 @@ objects:
           name: "splunk"
       spec:
         containers:
-        - capabilities: {}
-          env:
-          - name: SPLUNK_DEPLOYMENT_SERVER
-            value: ${DEPLOYMENT_SERVER}
-          name: "splunk-forwarder"
+        #- capabilities: {}
+        #  env:
+        #  - name: SPLUNK_DEPLOYMENT_SERVER
+        #    value: ${DEPLOYMENT_SERVER}
+        - name: "splunk-forwarder"
           image: "splunk-forwarder:latest"
           ports:
             - containerPort: 8089
@@ -68,8 +71,8 @@ objects:
           volumeMounts:
           - mountPath: /host/log
             name: host-logdir
-          nodeSelector:
-            splunk-forwarder: "true"
+        nodeSelector:
+          splunk-forwarder: "true"
         volumes:
         - name: host-logdir
           hostPath:
