@@ -31,6 +31,8 @@ $ oc label node --all splunk-forwarder=false --overwrite
 
 $ oc delete all -l app=splunk-forwarder-template
 
+$ oc delete ds splunk-forwarder
+
 $ oc replace -f https://raw.githubusercontent.com/makentenza/ocp-template-splunk-forwarder/daemonset/src/splunk-forwarder-template.yaml
 
 $ oc new-app splunk-forwarder-template --param=DEPLOYMENT_SERVER={IP or HOSTNAME}
