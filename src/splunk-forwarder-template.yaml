@@ -54,7 +54,7 @@ objects:
     template:
       metadata:
         labels:
-          name: "splunk"
+          name: "splunk-forwarder-template"
       spec:
         containers:
         #- capabilities: {}
