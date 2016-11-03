@@ -57,12 +57,8 @@ objects:
           name: "splunk-forwarder-template"
       spec:
         containers:
-        #- capabilities: {}
-        #  env:
-        #  - name: SPLUNK_DEPLOYMENT_SERVER
-        #    value: ${DEPLOYMENT_SERVER}
         - name: "splunk-forwarder"
-          image: "splunk-forwarder:latest"
+          image: "172.30.236.94:5000/logging/splunk-forwarder"
           ports:
             - containerPort: 8089
               protocol: "TCP"
