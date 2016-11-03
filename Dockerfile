@@ -14,6 +14,8 @@ LABEL io.k8s.description="Splunk forwarder agent" \
       io.openshift.expose-services="9997:tcp" \
       io.openshift.tags="splunk"
 
+RUN yum -y install telnet net-tools --disablerepo=* --enablerepo=rhel-7-server-rpms && yum clean all
+
 WORKDIR /root/
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
