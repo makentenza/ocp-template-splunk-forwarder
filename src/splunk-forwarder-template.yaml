@@ -52,9 +52,9 @@ objects:
   spec:
     replicas: 1
     template:
-      metadata:
-        labels:
-          name: "splunk-forwarder-template"
+      #metadata:
+      #  labels:
+      #    name: "splunk-forwarder-template"
       spec:
         containers:
         - name: "splunk-forwarder"
