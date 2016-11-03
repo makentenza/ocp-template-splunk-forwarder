@@ -3,7 +3,7 @@ OpenShift Template for Building and Deploying Splunk Forwarder.
 
 $ oc project logging
 
-$ oc create -f https://raw.githubusercontent.com/makentenza/ocp-template-splunk-forwarder/master/src/splunk-forwarder-template.yaml
+$ oc create -f https://raw.githubusercontent.com/makentenza/ocp-template-splunk-forwarder/daemonset/src/splunk-forwarder-template.yaml
 
 $ oc new-app splunk-forwarder-template --param=DEPLOYMENT_SERVER={IP or HOSTNAME}
 
@@ -31,7 +31,7 @@ $ oc label node --all splunk-forwarder=false --overwrite
 
 $ oc delete all -l app=splunk-forwarder-template
 
-$ oc replace -f https://raw.githubusercontent.com/makentenza/ocp-template-splunk-forwarder/master/src/splunk-forwarder-template.yaml
+$ oc replace -f https://raw.githubusercontent.com/makentenza/ocp-template-splunk-forwarder/daemonset/src/splunk-forwarder-template.yaml
 
 $ oc new-app splunk-forwarder-template --param=DEPLOYMENT_SERVER={IP or HOSTNAME}
 
