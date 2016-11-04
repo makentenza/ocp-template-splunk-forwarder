@@ -60,8 +60,8 @@ objects:
         - name: "splunk-forwarder"
           image: "172.30.236.94:5000/logging/splunk-forwarder"
           ports:
-            - containerPort: 9997
-              protocol: "TCP"
+            - containerPort: 8089
+              hostPort: 8089
           securityContext:
             privileged: true
           volumeMounts:

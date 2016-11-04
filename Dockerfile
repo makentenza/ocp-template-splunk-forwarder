@@ -11,7 +11,7 @@ ENV SPLUNK_SERVER ${SPLUNK_DEPLOYMENT_SERVER}:8089
 
 LABEL io.k8s.description="Splunk forwarder agent" \
       io.k8s.display-name="Splunk Forwarder" \
-      io.openshift.expose-services="9997:tcp" \
+      io.openshift.expose-services="8089:tcp" \
       io.openshift.tags="splunk"
 
 RUN yum -y install telnet net-tools --disablerepo=* --enablerepo=rhel-7-server-rpms && yum clean all
@@ -27,6 +27,6 @@ VOLUME ["/host/log"]
 ENTRYPOINT ["/root/entrypoint.sh"]
 CMD ["start-service"]
 
-EXPOSE 9997
+EXPOSE 8089
 
 USER root
