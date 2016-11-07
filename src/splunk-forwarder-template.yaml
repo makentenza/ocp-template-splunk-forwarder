@@ -64,7 +64,7 @@ objects:
           volumeMounts:
           - mountPath: /host/log
             name: host-logdir
-          - mountPath: /docker/log
+          - mountPath: /var/lib/docker/containers
             name: docker-logdir
         nodeSelector:
           splunk-forwarder: "true"
