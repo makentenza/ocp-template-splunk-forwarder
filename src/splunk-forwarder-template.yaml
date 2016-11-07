@@ -31,7 +31,6 @@ objects:
       type: Git
       git:
         uri: https://github.com/makentenza/ocp-template-splunk-forwarder.git
-        ref: "daemonsetv2"
     strategy:
       type: "Docker"
       dockerStrategy:
