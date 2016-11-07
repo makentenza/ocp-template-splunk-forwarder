@@ -31,18 +31,22 @@ objects:
       type: Git
       git:
         uri: https://github.com/makentenza/ocp-template-splunk-forwarder.git
+        ref: "daemonsetv2"
     strategy:
       type: "Docker"
       dockerStrategy:
         from:
           kind: "DockerImage"
           name: "registry.access.redhat.com/rhel7.2"
+        env:
+        - name: SPLUNK_DEPLOYMENT_SERVER
+          value: ${DEPLOYMENT_SERVER}
     output:
       to:
         kind: "ImageStreamTag"
         name: "splunk-forwarder:latest"
-- apiVersion: "v1"
-  kind: "DeploymentConfig"
+- apiVersion: extensions/v1beta1
+  kind: DaemonSet
   metadata:
     name: "splunk-forwarder"
   spec:
@@ -50,27 +54,27 @@ objects:
     template:
       metadata:
         labels:
-          name: "splunk"
+          name: "splunk-forwarder-template"
       spec:
         containers:
-        - capabilities: {}
-          env:
-          - name: SPLUNK_DEPLOYMENT_SERVER
-            value: ${DEPLOYMENT_SERVER}
-          name: "splunk-forwarder"
-          image: "splunk-forwarder:latest"
-          ports:
-            - containerPort: 8089
-              protocol: "TCP"
+        - name: "splunk-forwarder"
+          image: "172.30.236.94:5000/logging/splunk-forwarder"
           securityContext:
             privileged: true
           volumeMounts:
           - mountPath: /host/log
             name: host-logdir
+          - mountPath: /var/lib/docker/containers
+            name: docker-logdir
+        nodeSelector:
+          splunk-forwarder: "true"
         volumes:
         - name: host-logdir
           hostPath:
             path: /var/log
+        - name: docker-logdir
+          hostPath:
+            path: /var/lib/docker/containers
         securityContext:
           privileged: true
         serviceAccount: splunk-forwarder
