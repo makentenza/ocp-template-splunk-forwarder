@@ -12,16 +12,6 @@ metadata:
   namespace: openshift
 objects:
 - apiVersion: v1
-  kind: Service
-  metadata:
-    name: splunk-forwarder
-  spec:
-    ports:
-    - name: splunk
-      port: 8089
-    selector:
-      name: splunk-forwarder-template
-- apiVersion: v1
   kind: ServiceAccount
   metadata:
     name: splunk-forwarder
@@ -69,9 +59,6 @@ objects:
         containers:
         - name: "splunk-forwarder"
           image: "172.30.236.94:5000/logging/splunk-forwarder"
-          ports:
-            - containerPort: 8089
-              #hostPort: 8089
           securityContext:
             privileged: true
           volumeMounts:
